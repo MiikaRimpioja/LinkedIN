@@ -1,0 +1,338 @@
+/* Class selectors */
+body {
+  background-color: #f0f4f8;
+  font-family: Arial, sans-serif;
+  color: #333333;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: #1c426d;
+  border-color: #1c426d;
+}
+
+.btn-primary:hover {
+  background-color: #163a5b;
+  border-color: #163a5b;
+}
+
+.card {
+  border: solid 1px #1c426d;
+  border-radius: 19px;
+  color: #333333;
+  background-color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-text {
+  font-size: large;
+}
+
+.card-title {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #1c426d;
+}
+
+.center-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: solid #163a5b;
+  padding: 1rem;
+}
+
+.container {
+  min-width: 80%;
+  width: clamp(18.75rem, 80%, 75rem);
+  max-width: 100%;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container.mt-5 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: none;
+}
+
+.container.mt-6 {
+  margin-top: 3rem;
+}
+
+.custom-select {
+  border: 2px solid #1c426d;
+  background-color: #e9f1f7;
+  padding: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.custom-select:focus {
+  border-color: #163a5b;
+  box-shadow: 0 0 5px rgba(22, 58, 91, 0.5);
+}
+
+.form-label {
+  font-size: 1.5em;
+}
+
+h2,
+h3 {
+  color: #1c426d;
+  font-size: clamp(2rem, 2.5vw, 3rem);
+}
+
+.invalid-feedback {
+  color: #d9534f;
+}
+
+.nav-link {
+  color: #ffffff;
+  margin-left: 15px;
+  font-size: 1.5em;
+  text-decoration: none;
+  padding-right: 20px;
+}
+
+.nav-link:hover {
+  color: #b4c9e0;
+}
+
+.navbar-brand {
+  color: #ffffff;
+  font-size: 2em;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.otsikko {
+  border: solid 2px #1c426d;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5em;
+  color: #ffffff;
+  background-color: #1c426d;
+  border-radius: 10px;
+  margin: 20px auto;
+  width: fit-content;
+}
+
+.table {
+  overflow-x: auto;
+  box-sizing: border-box;
+  border: 1px solid #1c426d;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(28, 66, 109, 0.1);
+}
+
+.table-striped tbody tr:hover {
+  background-color: rgba(28, 66, 109, 0.2);
+}
+
+.table td,
+.table th {
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.table th {
+  background-color: #1c426d;
+  color: white;
+  text-align: center;
+}
+
+.tbodyDiv {
+  max-height: clamp(5em, fit-content, 250px);
+  overflow: auto;
+}
+
+/* ID selectors */
+#app {
+  height: auto;
+  padding: 1rem;
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#background_div {
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.basic_ottelu_kortti {
+  width: clamp(20vw, 765px, 70vw);
+  border: solid 12px transparent; /* Make the border transparent */
+  border-radius: 20px;
+  box-shadow: 0 0 10px 5px #8ea4b8,
+    /* Blur effect on the border */ 4px 4px 8px rgba(22, 58, 91, 0.2),
+    4px 6px 20px rgba(22, 58, 91, 0.19);
+}
+.paattynyt_style {
+  width: clamp(20vw, 765px, 70vw);
+  border: solid 12px transparent; /* Make the border transparent */
+  border-radius: 20px;
+  box-shadow: 0 0 10px 5px #1c426d,
+    /* Blur effect on the border */ 4px 4px 8px rgba(22, 58, 91, 0.2),
+    4px 6px 20px rgba(22, 58, 91, 0.19);
+}
+.ottelu_kortti {
+  z-index: 1;
+  position: relative;
+  background-color: white;
+  width: clamp(20vw, 765px, 70vw);
+}
+
+.ottelu_kortti::after,
+.ottelu_kortti::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  background-image: conic-gradient(
+    from var(--angle),
+    #1c426d,
+    #8e44ad,
+    #d2b4de,
+    #1c426d
+  );
+  z-index: -1;
+  border-radius: 20px;
+  animation: 3s spin linear infinite;
+}
+
+.ottelu_kortti::before {
+  filter: blur(1rem);
+  opacity: 1;
+}
+
+#ala_otsikko,
+#ottelun_otsikko {
+  background-color: #1c426d;
+  border-radius: 60px;
+  margin: 20px auto;
+  padding-bottom: 3px;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  color: #ffffff;
+  text-align: center;
+  font-size: 2em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+#logo {
+  border: solid 1px white;
+  border-radius: 20px;
+  box-shadow: 0 0 10px 5px white,
+    /* White glow */ 4px 4px 8px rgba(22, 58, 91, 0.2),
+    4px 6px 20px rgba(22, 58, 91, 0.19);
+}
+
+#sivun_otsikko {
+  color: #163a5b;
+}
+#header {
+  margin-top: 1.5rem;
+}
+
+/* Property */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+/* Keyframes */
+@keyframes spin {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Input and select styles */
+input[type='text'],
+input[type='password'],
+input[type='number'],
+input[type='datetime-local'],
+select,
+.form-select {
+  width: auto;
+  min-width: 10rem;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #1c426d;
+  border-radius: 5px;
+  background-color: #e9f1f7;
+  font-size: 1em;
+  color: #333333;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Focus state for inputs and selects */
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='number']:focus,
+input[type='datetime-local']:focus,
+select:focus {
+  border-color: #163a5b;
+  box-shadow: 0 0 5px rgba(22, 58, 91, 0.5);
+  outline: none;
+}
+
+/* Placeholder text style */
+input[type='text']::placeholder,
+input[type='password']::placeholder,
+input[type='number']::placeholder,
+input[type='datetime-local']::placeholder {
+  color: #999999;
+}
+
+/* Disabled state for inputs and selects */
+input[type='text']:disabled,
+input[type='password']:disabled,
+input[type='number']:disabled,
+input[type='datetime-local']:disabled,
+select:disabled {
+  background-color: #f0f4f8;
+  color: #999999;
+  cursor: not-allowed;
+}
+
+/* Custom select styles */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 4 5"><path fill="%23333333" d="M2 0L0 2h4zM2 5L0 3h4z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 10px;
+}
+
+/* Custom select arrow for IE */
+select::-ms-expand {
+  display: none;
+}

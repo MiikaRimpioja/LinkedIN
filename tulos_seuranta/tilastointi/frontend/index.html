@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/index.css">
+  <title>Dashboard</title>
+</head>
+
+<body>
+  <!-- Navigaatiopalkki -->
+  <nav class="navbar navbar-expand-lg" style="background-color: #1c426d; border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <img id="logo" src="./static/assets/mighty_mice_logo_musta.png" alt="Mighty Mice Logo" class="img-fluid"
+          style="height: 75px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="/" data-link>Kotisivu</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/ottelut" data-link>Ottelut</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tilastot" data-link>Tilastot</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/hallinto" data-link>Hallitus</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!-- Sovelluksen pääsisältö -->
+  <div id="app" class="container"></div>
+  <!-- Mukautettu JavaScript ja Bootstrap-->
+  <script src="/static/js/index.js" type="module"></script>
+  <script src="/js/bootstrap.bundle.min.js"></script>
+
+
+
+</body>
+
+</html>
