@@ -1,0 +1,56 @@
+# Node modules
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Optional: coverage reports
+coverage/
+
+# Optional: TypeScript
+*.tsbuildinfo
+
+# Optional: Next.js
+.next/
+
+# Optional: React Native
+.expo/
+
+
+# Angular cache
+frontend/.angular/cache/
+
+# ESLint
+.eslintcache
+
+# Prettier
+.prettiercache
+
+# OCR / PDF processing
+temp/
+*.png
+*.pdf
+*.tmp

@@ -1,0 +1,144 @@
+<div class="nav-button-row">
+  <!-- ----- Käyttäjän vaihdos ----- -->
+  <button class="user-change" (click)="handleUserChange()">👤</button>
+  <button class="btn-back" (click)="handleReturn()"></button>
+</div>
+
+<!-- ----- Notifikaatio ----- -->
+@if(showNotification){
+<app-notification-modal
+  [isSuccess]="notificationStatus"
+  [message]="notificationMessage"
+  (closeModal)="handleModalClose()"
+></app-notification-modal>
+}
+
+<!-- ----- Pdf:n näyttö modaalissa ----- -->
+@if(showModal){
+<app-modal [pdfUrl]="fileUrl" (closeModal)="showModal = false"></app-modal>
+<div class="modal-on"></div>
+} @else {
+<div class="tuote-container">
+  <h2 data-testid="otsikko">{{ company }}</h2>
+
+  <!-- ----- Tietoboksit lähettäjälle ja vastaanottajalle ----- -->
+  <div class="info-container">
+    @if(sender){
+    <details class="info-dropdown">
+      <summary>Lähettäjän tiedot</summary>
+      @if(sender.company){
+      <p>{{ sender.company }}</p>
+      } @if(sender.address){
+      <p>{{ sender.address }}, {{ sender.postal_code }} {{ sender.city }}</p>
+      } @if(sender.country){
+      <p>{{ sender.country }}</p>
+      } @if(sender.contact_person){
+      <p>Yhteyshenkilö: {{ sender.contact_person }}</p>
+      }
+    </details>
+    } @if(receiver){
+    <details class="info-dropdown">
+      <summary>Vastaanottajan tiedot</summary>
+      @if(receiver.address){
+      <p>{{ receiver.address }}</p>
+      } @if(receiver.postal_code){
+      <p>{{ receiver.postal_code }} {{ receiver.city }}</p>
+      } @if(receiver.country){
+      <p>{{ receiver.country }}</p>
+      } @if(receiver.contact_person){
+      <p>Yhteyshenkilö: {{ receiver.contact_person }}</p>
+      }
+    </details>
+    }
+  </div>
+
+  <!-- ----- Admin käyttäjälle näkyvä info ----- -->
+  @if(admin){
+  <h4 class="muokkaaja">Muokkaaja: Miika</h4>
+  } @if(data && data.length === 0){
+  <div>Tuotteita ei löytynyt...</div>
+  } @else if(tuoteRivit && tuoteRivit.length > 0){
+
+  <!-- ----- Hakulomake ----- -->
+  <form (ngSubmit)="scrollToProduct()" class="search-form">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      class="search-input"
+      placeholder="Hae koodilla"
+    />
+    <button type="submit" class="search-button">Hae</button>
+  </form>
+
+  <!-- ----- Tuoterivit ----- -->
+  <form (ngSubmit)="handleSubmit()" (keydown.enter)="$event.preventDefault()">
+    @for(tuote of tuoteRivit; track tuote.product_line_id){ @if(!(tuote.product_name === null &&
+    tuote.code === null && tuote.shipped_quantity === null)) {
+    <div
+      class="tuote-div"
+      #productRow
+      [class.highlight]="tuote.product_line_id === selectedProductId"
+      [class.checked]="tuote.checked"
+      (touchstart)="onTouchStart($event, productRow)"
+      (touchmove)="onTouchMove($event)"
+      (touchend)="onTouchEnd($event, tuote)"
+    >
+      <div class="tuote-nimi-wrapper">
+        <div class="tuote-nimi">
+          {{ tuote.product_name }}
+        </div>
+        @if(tuoteRivit.indexOf(tuote) === 0){
+        <div class="extra-info">Läh. / Saap.</div>
+        }
+      </div>
+
+      <div class="tieto-boksi">
+        <input
+          type="text"
+          placeholder="{{ tuote.code }}"
+          [(ngModel)]="tuote.code"
+          name="koodi-{{ tuote.code }}"
+          class="input-field-text"
+        />
+
+        <div class="quantity-wrapper">
+          {{ tuote.ordered_quantity ?? 0 }}
+        </div>
+
+        <input
+          type="number"
+          placeholder="{{ tuote.shipped_quantity }}"
+          [(ngModel)]="tuote.shipped_quantity"
+          name="kpl-{{ tuote.shipped_quantity }}"
+          class="input-field-qty"
+          #qtyInput
+        />
+
+        <button
+          type="button"
+          (click)="handleCheck(tuote)"
+          class="check-button"
+          [class.checked]="tuote.checked"
+        >
+          Valmis
+        </button>
+      </div>
+    </div>
+    } }
+
+    <!-- ----- Dokumentin katsaus ja Lähetä painikkeet ----- -->
+    <div class="inspect-view-buttons">
+      <button class="btn-show-modal" type="button" (click)="switchModal()">Dokumentti</button>
+      <button class="btn-send" type="submit" [disabled]="isAllChecked">Lähetä</button>
+    </div>
+  </form>
+
+  }
+
+  <!-- ----- Latausnäkymä ----- -->
+  @else {
+  <div>Ladataan...</div>
+  }
+</div>
+}

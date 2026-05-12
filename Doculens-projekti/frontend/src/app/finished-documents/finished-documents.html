@@ -1,0 +1,64 @@
+<!-- ----- Notifikaatio ----- -->
+
+@if(showNotification){
+<app-notification-modal
+  [isSuccess]="notificationStatus"
+  [message]="notificationMessage"
+  (closeModal)="handleModalClose()"
+></app-notification-modal>
+}
+
+<!-- ----- Sisältö ----- -->
+
+<div class="container">
+  <h1>Valmiit</h1>
+
+  <button class="btn-nav" (click)="handleReturnHome()">Keskeneräiset dokumentit</button>
+
+  <!-- ----- Hakulomake ----- -->
+
+  <form (ngSubmit)="handleSearch()" class="search-container">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      class="search-input"
+      placeholder="Hae hakusanalla"
+    />
+    <input type="date" [(ngModel)]="searchDate" name="searchDate" />
+    <button type="submit" class="search-button">Hae</button>
+    <button type="button" (click)="handleReset()" class="reset-button">Tyhjennä</button>
+  </form>
+
+  <!-- ----- Dokumenttilista ----- -->
+
+  @if(selectedFiles.length > 0){
+  <div class="document-container">
+    @for(file of selectedFiles; track file.id; let isFirst = $first; let isLast = $last){
+    <div
+      class="document"
+      [ngClass]="{
+        'first-document': isFirst,
+        'last-document': isLast
+      }"
+      (click)="handleClick(file)"
+    >
+      <div class="top-row">
+        <div class="filename">{{ file.name }}</div>
+        <div class="date">{{ file.uploadDate }}</div>
+      </div>
+      <div class="bottom-row">
+        <div class="author">{{ file.author }}</div>
+      </div>
+    </div>
+    }
+  </div>
+  } @else {
+
+  <!-- ----- Ei dokumenttejä -näkymä ----- -->
+
+  <div class="no-documents-view">
+    <div class="no-documents-view-text">Dokumenttejä ei löytynyt</div>
+  </div>
+  }
+</div>

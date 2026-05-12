@@ -1,0 +1,92 @@
+{
+  "unfinished_documents": [
+    {
+      "id": 1,
+      "filename": "orders_sample_1.pdf",
+      "sender": {
+        "id": 101,
+        "company": "Acme Corporation",
+        "email": "orders@acme.com"
+      },
+      "upload_date": "2025-11-05T10:30:00.000Z"
+    },
+    {
+      "id": 2,
+      "filename": "purchase_order_2.pdf",
+      "sender": {
+        "id": 102,
+        "company": "Global Industries Inc.",
+        "email": "procurement@global.com"
+      },
+      "upload_date": "2025-11-05T11:15:00.000Z"
+    },
+    {
+      "id": 3,
+      "filename": "supply_request_3.pdf",
+      "sender": {
+        "id": 103,
+        "company": "TechStart Solutions",
+        "email": "orders@techstart.com"
+      },
+      "upload_date": "2025-11-05T12:45:00.000Z"
+    }
+  ],
+  "finished_documents": [
+    {
+      "id": 10,
+      "filename": "processed_order_001.pdf",
+      "uploaded_by": "John Smith",
+      "status": "processed",
+      "upload_date": "2025-11-04T14:20:00.000Z",
+      "modified_date": "2025-11-04T15:30:00.000Z"
+    },
+    {
+      "id": 11,
+      "filename": "processed_order_002.pdf",
+      "uploaded_by": "Jane Doe",
+      "status": "processed",
+      "upload_date": "2025-11-04T16:00:00.000Z",
+      "modified_date": "2025-11-04T16:45:00.000Z"
+    }
+  ],
+  "product_rows": [
+    {
+      "id": 1,
+      "document_id": 1,
+      "product_name": "Widget A",
+      "code": "WDG-A-001",
+      "ordered_quantity": 50,
+      "shipped_quantity": 50,
+      "note": "Standard order"
+    },
+    {
+      "id": 2,
+      "document_id": 1,
+      "product_name": "Widget B",
+      "code": "WDG-B-002",
+      "ordered_quantity": 100,
+      "shipped_quantity": 95,
+      "note": "5 units back-ordered"
+    },
+    {
+      "id": 3,
+      "document_id": 1,
+      "product_name": "Gadget X",
+      "code": "GDG-X-010",
+      "ordered_quantity": 25,
+      "shipped_quantity": 25,
+      "note": null
+    }
+  ],
+  "form_validation_data": {
+    "valid_code": "TEST-CODE-001",
+    "valid_qty": "10",
+    "valid_note": "This is a valid test note",
+    "invalid_negative_qty": "-5",
+    "invalid_text_in_qty": "abc123",
+    "empty_code": "",
+    "empty_qty": "",
+    "special_chars_code": "TEST@#$%",
+    "long_note": "This is a very long note that tests the maximum length validation of the note field in the form"
+  }
+}

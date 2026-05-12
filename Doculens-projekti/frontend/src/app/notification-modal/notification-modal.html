@@ -1,0 +1,43 @@
+@if (isLoading) {
+<!-- Latausvaihe -->
+<div class="modal-overlay" (click)="$event.stopPropagation()">
+  <div
+    class="modal-container"
+    [class.loading]="isLoading"
+    [class.closing]="closing"
+    (click)="$event.stopPropagation()"
+  >
+    <!-- Viesti -->
+    <p class="modal-message">{{ message }}</p>
+    <!-- OK-nappia ei näytetä latauksen aikana -->
+  </div>
+</div>
+} @else if (isSuccess) {
+<!-- Onnistunut -->
+<div class="modal-overlay" (click)="onBackgroundClick($event)">
+  <div
+    class="modal-container"
+    [class.success]="isSuccess"
+    [class.closing]="closing"
+    (click)="$event.stopPropagation()"
+  >
+    <p class="modal-message">{{ message }}</p>
+  </div>
+</div>
+} @else {
+<!-- Epäonnistunut -->
+<div class="modal-overlay-blur" (click)="onBackgroundClick($event)">
+  <div
+    class="modal-container"
+    [class.error]="!isSuccess && !isLoading"
+    [class.closing]="closing"
+    (click)="$event.stopPropagation()"
+  >
+    <p class="modal-message">{{ message }}</p>
+
+    @if(showOkButton){
+    <button class="btn-ok" (click)="onCloseClick()">OK</button>
+    }
+  </div>
+</div>
+}

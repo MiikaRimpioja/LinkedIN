@@ -1,0 +1,254 @@
+@use 'sass:color';
+
+// 🎨 VÄRIT JA MUUTTUJAT
+$btn-radius: 10px;
+$btn-font-size: 0.95rem;
+$btn-text: #ffffff;
+$btn-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+$btn-transition: 180ms ease;
+
+$btn-bg-download: #0066ff;
+$btn-bg-nav: #4b42c8;
+$btn-bg-search: #00cc66;
+$btn-bg-reset: #888;
+
+$btn-bg-download-hover: color.adjust($btn-bg-download, $lightness: -8%);
+$btn-bg-nav-hover: color.adjust($btn-bg-nav, $lightness: -8%);
+$btn-bg-search-hover: color.adjust($btn-bg-search, $lightness: -8%);
+$btn-bg-reset-hover: color.adjust($btn-bg-reset, $lightness: -8%);
+
+$form-input-bg: #f4f6ff;
+
+// 🗂 Dokumenttilistan värit
+$doc-bg: #f0f4ff;
+$doc-border: #dce3f5;
+$doc-hover: #dce3f5;
+$doc-active: #e0e8ff;
+
+$doc-shadow-sides: 3px 0 8px rgba(100, 140, 180, 0.12), -3px 0 8px rgba(100, 140, 180, 0.12);
+$doc-shadow-full: 0 4px 12px rgba(100, 140, 180, 0.15);
+
+// 🧩 YHTEINEN NAPPITYYLI
+@mixin button-base {
+  width: 100%;
+  max-width: 180px;
+  padding: 0.6rem 1.2rem;
+  font-size: clamp(0.85rem, 2vw, $btn-font-size);
+  font-weight: 600;
+  border: none;
+  border-radius: $btn-radius;
+  cursor: pointer;
+  transition: background-color $btn-transition, transform $btn-transition;
+  box-shadow: $btn-shadow;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+  }
+  &:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// 🔘 NAPIT
+.btn-download {
+  @include button-base;
+  background-color: $btn-bg-download;
+  color: $btn-text;
+  &:hover {
+    background-color: $btn-bg-download-hover;
+  }
+}
+
+.btn-nav {
+  @include button-base;
+  background-color: $btn-bg-nav;
+  color: $btn-text;
+  &:hover {
+    background-color: $btn-bg-nav-hover;
+  }
+}
+
+.search-button {
+  @include button-base;
+  background-color: $btn-bg-search;
+  color: $btn-text;
+  &:hover {
+    background-color: $btn-bg-search-hover;
+  }
+}
+
+.reset-button {
+  @include button-base;
+  background-color: $btn-bg-reset;
+  color: $btn-text;
+  &:hover {
+    background-color: $btn-bg-reset-hover;
+  }
+}
+
+// 🔍 HAKULOMAKE
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1rem 0 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-input,
+input[type='date'] {
+  flex: 1 1 200px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  background-color: $form-input-bg;
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  &:focus {
+    outline: none;
+    border-color: $btn-bg-nav;
+    box-shadow: 0 0 0 3px rgba($btn-bg-nav, 0.2);
+  }
+}
+
+// 📦 LAYOUT
+.container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// 🗂 Dokumenttilista
+.document-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+.document,
+.first-document,
+.last-document {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.25rem;
+  background-color: $doc-bg;
+  border: 1px solid $doc-border;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: $doc-hover;
+    transform: translateY(-2px);
+  }
+  &:active {
+    background-color: $doc-active;
+    transform: translateY(0);
+  }
+
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    .filename {
+      text-align: left;
+      color: #222;
+    }
+    .date {
+      text-align: right;
+      font-size: 0.85rem;
+      color: #666;
+    }
+  }
+
+  .bottom-row {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #444;
+    text-align: left;
+    width: 100%;
+  }
+}
+
+.first-document {
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  box-shadow: $doc-shadow-full;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.last-document {
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  box-shadow: $doc-shadow-full;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.document:not(.first-document):not(.last-document) {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  box-shadow: $doc-shadow-sides;
+}
+
+// 🪶 Tyhjä näkymä
+.no-documents-view {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+.no-documents-view-text {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+  .filename {
+    width: 160px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+}
+
+.title {
+  color: white;
+}

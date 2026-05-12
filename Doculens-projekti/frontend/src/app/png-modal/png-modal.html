@@ -1,0 +1,25 @@
+<!-- sisempi div estää modaalin klikkausten aiheuttaman modaalista poistumisen  -->
+
+@if(pdfUrl){
+<div class="modal-overlay" (click)="onBackgroundClick($event)"></div>
+<div class="modal-container" (click)="$event.stopPropagation()">
+  <pdf-viewer [src]="pdfUrl" [render-text]="true" [original-size]="false"></pdf-viewer>
+  <button class="btn-back" (click)="onCloseClick()">Sulje</button>
+</div>
+} @else {
+<div class="modal-overlay" (click)="onBackgroundClick($event)"></div>
+<div class="alternative-view">
+  Dokumenttia ei löytynyt
+  <button class="btn-back" (click)="onCloseClick()">Sulje</button>
+</div>
+}
+
+<!-- 
+  @if(pngSource) {
+<div class="modal-overlay" (click)="onBackgroundClick($event)"></div>
+<div class="modal-container" (click)="$event.stopPropagation()">
+  <img [src]="pngSource" alt="Dokumentti" />
+  <button class="btn-back" (click)="onCloseClick()">Close</button>
+</div>
+}
+-->

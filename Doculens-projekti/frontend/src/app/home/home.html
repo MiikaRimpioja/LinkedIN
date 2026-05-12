@@ -1,0 +1,159 @@
+<!-- ----- Admin näkymä ----- -->
+@if(admin){
+<!-- ----- Notifikaatio ----- -->
+@if(showNotification){
+<app-notification-modal
+  [isSuccess]="notificationStatus"
+  [message]="notificationMessage"
+  (closeModal)="handleModalClose()"
+></app-notification-modal>
+}
+<!-- ----- Käyttäjä & Navigaatio ----- -->
+<div class="nav-button-row">
+  <button class="user-change" (click)="handleUserChange()">👤</button>
+  <button class="btn-nav" (click)="handleFinishedDocuments()">Valmiit lähetyslistat</button>
+</div>
+
+<!-- ----- Sisältö ----- -->
+<div class="container">
+  <h1 class="page-title">Keskeneräiset</h1>
+
+  <!-- ----- Dokumentin lataus ----- -->
+  <div class="button-row">
+    <button class="btn-download" (click)="fileInput.click()" [disabled]="!palletNumber">
+      Lataa PDF
+    </button>
+    <input class="pallet-input" type="number" placeholder="Lavanro" [(ngModel)]="palletNumber" />
+  </div>
+
+  <input
+    #fileInput
+    type="file"
+    accept="application/pdf"
+    style="display: none"
+    (change)="onFileSelected($event)"
+  />
+
+  <h2>Hae lähetyslistaa</h2>
+
+  <!-- ----- Dokumentin haku ----- -->
+  <form (ngSubmit)="handleSearch(searchTerm)" class="search-container">
+    <input
+      type="number"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      class="search-input"
+      placeholder="Hae lavanumerolla"
+      min="1"
+      step="1"
+    />
+
+    <button type="button" (click)="handleReset()" class="reset-button">Tyhjennä</button>
+    <button type="submit" class="search-button">Hae</button>
+  </form>
+
+  <!-- ----- Näytettävien dokumenttien määrävalikko ----- -->
+  <label for="amount">Määrä</label>
+  <select
+    class="maara-label"
+    name="amount"
+    id="amount"
+    [(ngModel)]="displayedAmount"
+    (ngModelChange)="handleAmountChange()"
+  >
+    <option [ngValue]="5">5</option>
+    <option [ngValue]="10">10</option>
+    <option [ngValue]="15">15</option>
+    <option [ngValue]="20">20</option>
+    <option [ngValue]="50">50</option>
+  </select>
+
+  <!-- ----- Dokumenttilista ----- -->
+  @if(displayedFiles.length > 0){
+  <div class="document-container">
+    @for(file of displayedFiles; track file.name; let isFirst = $first; let isLast = $last){
+    <div
+      class="document"
+      [ngClass]="{
+        'first-document': isFirst,
+        'last-document': isLast
+      }"
+      (click)="handleClick(file)"
+    >
+      <div class="top-row">
+        <div class="filename">{{ file.name }}</div>
+        <div class="date">{{ file.uploadDate }}</div>
+      </div>
+      <div class="bottom-row">
+        <div class="author">{{ file.author }}</div>
+      </div>
+    </div>
+
+    }
+  </div>
+  } @else {
+
+  <!-- ----- Ei dokumentteja näkymä ----- -->
+  <div class="no-documents-view">
+    <div class="no-documents-view-text">Dokumenttejä ei löytynyt</div>
+  </div>
+  }
+</div>
+
+}
+
+<!-- ----- Käyttäjän näkymä ----- -->
+@else{
+<!-- ----- Notifikaatio ----- -->
+@if(showNotification){
+<app-notification-modal
+  [isLoading]="isUploading"
+  [isSuccess]="notificationStatus"
+  [message]="notificationMessage"
+  [showOkButton]="!isUploading"
+  (closeModal)="handleModalClose()"
+></app-notification-modal>
+] }
+<div class="nav-button-row">
+  <!-- ----- Käyttäjän vaihdos ----- -->
+  <button class="user-change" (click)="handleUserChange()" style="margin-bottom: 50px">👤</button>
+</div>
+
+<!-- ----- Sisältö ----- -->
+<div class="container">
+  <!-- ----- Dokumentin lataus ----- -->
+  <h2>Lataa lähetyslista</h2>
+  <div class="button-row">
+    <button class="btn-download" (click)="fileInput.click()" [disabled]="!palletNumber">
+      Lataa PDF
+    </button>
+    <input class="pallet-input" type="number" placeholder="Lavanro" [(ngModel)]="palletNumber" />
+  </div>
+
+  <input
+    #fileInput
+    type="file"
+    accept="application/pdf"
+    style="display: none"
+    (change)="onFileSelected($event)"
+  />
+
+  <!-- ----- Dokumentin haku ----- -->
+  <h2>Hae lähetyslistaa</h2>
+  <form (ngSubmit)="handleSearch(searchTerm)" class="search-container">
+    <input
+      type="number"
+      [(ngModel)]="searchTerm"
+      name="searchTerm"
+      class="search-input"
+      placeholder="Hae lavanumerolla"
+      min="1"
+      step="1"
+    />
+
+    <button type="button" (click)="handleReset()" class="reset-button">Tyhjennä</button>
+    <button type="submit" class="search-button">Hae</button>
+  </form>
+</div>
+
+}

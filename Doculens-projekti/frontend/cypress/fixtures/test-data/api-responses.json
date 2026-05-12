@@ -1,0 +1,158 @@
+{
+  "success_responses": {
+    "upload_success": {
+      "status": 200,
+      "message": "PDF tallennettu, OCR suoritettu ja Claude jäsensi sisällön",
+      "ocrResults": [
+        {
+          "page": "page_1.png",
+          "text": "Order #12345\nAcme Corporation\nDate: 2025-11-05"
+        },
+        {
+          "page": "page_2.png",
+          "text": "Product List:\n1. Widget A - Qty: 50\n2. Widget B - Qty: 100"
+        }
+      ],
+      "claudeResults": [
+        {
+          "page": 1,
+          "raw": "Raw text from page 1",
+          "normalized": {
+            "products": [
+              {
+                "name": "Widget A",
+                "code": "WDG-A-001",
+                "quantity": 50
+              }
+            ]
+          }
+        }
+      ],
+      "skippedPages": []
+    },
+    "update_success": {
+      "status": 200,
+      "message": "Dokumentin tiedot päivitetty onnistuneesti",
+      "data": {
+        "documentId": 1,
+        "updatedFields": 3,
+        "timestamp": "2025-11-05T14:30:00.000Z"
+      }
+    },
+    "fetch_document_success": {
+      "status": 200,
+      "data": {
+        "id": 1,
+        "filename": "orders.pdf",
+        "sender": {
+          "id": 101,
+          "company": "Acme Corporation"
+        },
+        "products": [
+          {
+            "id": 1,
+            "product_name": "Widget A",
+            "code": "WDG-A-001",
+            "ordered_quantity": 50,
+            "shipped_quantity": 50,
+            "note": "Standard order"
+          }
+        ]
+      }
+    }
+  },
+  "error_responses": {
+    "invalid_file_type": {
+      "status": 400,
+      "error": "Vain PDF-tiedostot sallittu",
+      "syy": "Lähetetty tiedosto ei ole PDF-muodossa"
+    },
+    "file_too_large": {
+      "status": 400,
+      "error": "Tiedosto ylittää 5 MB rajan",
+      "syy": "Tiedosto on liian suuri palvelimelle"
+    },
+    "no_file_provided": {
+      "status": 400,
+      "error": "Tiedostoa ei lähetetty",
+      "syy": "Lähetyspyynnössä ei ole tiedostoa"
+    },
+    "server_error_500": {
+      "status": 500,
+      "error": "Palvelinvirhe",
+      "syy": "Sisäinen palvelimen virhe. Yritä myöhemmin uudelleen"
+    },
+    "unauthorized": {
+      "status": 401,
+      "error": "Tunnus virheellinen",
+      "syy": "Käyttäjän tunnus tai salasana on virheellinen"
+    },
+    "not_found": {
+      "status": 404,
+      "error": "Dokumenttia ei löytynyt",
+      "syy": "Pyydetty dokumentti ei ole olemassa"
+    },
+    "ocr_failed": {
+      "status": 500,
+      "error": "OCR-käsittely epäonnistui",
+      "syy": "PDF-tiedostosta ei voitu lukea tekstiä"
+    },
+    "claude_parsing_failed": {
+      "status": 500,
+      "error": "Claude-jäsennys epäonnistui",
+      "syy": "Claude-API ei voinut jäsentää OCR-tulosta"
+    },
+    "database_error": {
+      "status": 500,
+      "error": "Tietokantahaku epäonnistui",
+      "syy": "Tietokanta ei vastaa"
+    },
+    "s3_upload_failed": {
+      "status": 500,
+      "error": "S3-tallennus epäonnistui",
+      "syy": "AWS S3 -pilveen tallennus epäonnistui"
+    }
+  },
+  "validation_errors": {
+    "missing_product_name": {
+      "field": "product_name",
+      "message": "Tuotteen nimi on pakollinen",
+      "severity": "error"
+    },
+    "invalid_quantity_format": {
+      "field": "ordered_quantity",
+      "message": "Määrän tulee olla numero",
+      "severity": "error"
+    },
+    "negative_quantity": {
+      "field": "shipped_quantity",
+      "message": "Määrä ei voi olla negatiivinen",
+      "severity": "error"
+    },
+    "invalid_code_format": {
+      "field": "code",
+      "message": "Koodi sisältää ei-sallittuja merkkejä",
+      "severity": "warning"
+    },
+    "code_too_long": {
+      "field": "code",
+      "message": "Koodi voi olla enintään 50 merkkiä pitkä",
+      "severity": "error"
+    },
+    "note_too_long": {
+      "field": "note",
+      "message": "Muistiinpano voi olla enintään 500 merkkiä pitkä",
+      "severity": "warning"
+    }
+  },
+  "notification_messages": {
+    "upload_success": "Tiedoston lähetys onnistui",
+    "upload_failed": "Tiedoston lähetys epäonnistui",
+    "save_success": "Tallennus onnistui",
+    "save_failed": "Tallennus epäonnistui",
+    "validation_error": "Validointivirhe - tarkista lomakkeen kentät",
+    "network_error": "Verkkoyhteysvirhe - tarkista yhteys",
+    "timeout_error": "Pyynnön aikakatkaisu - yritä myöhemmin uudelleen",
+    "document_not_found": "Dokumenttia ei löytynyt"
+  }
+}

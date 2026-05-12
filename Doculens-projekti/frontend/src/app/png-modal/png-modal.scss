@@ -1,0 +1,148 @@
+@use 'sass:color';
+$btn-bg-download: #0066ff;
+$btn-bg-send: #00cc66;
+$btn-bg-list: #0066ff;
+$btn-bg-download-hover: color.adjust($btn-bg-download, $lightness: -8%);
+$btn-bg-send-hover: color.adjust($btn-bg-send, $lightness: -8%);
+$btn-bg-list-hover: color.adjust($btn-bg-list, $lightness: -8%);
+$btn-text: #ffffff;
+$btn-download-padding: 1rem 2.1rem;
+$btn-send-padding: 0.2rem 2.1rem;
+$btn-list-padding: 0.2rem 2.1rem;
+$btn-radius: 20px;
+$btn-font-size: 1rem;
+$btn-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+$btn-transition: 180ms cubic-bezier(0.2, 0.9, 0.3, 1);
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.alternative-view {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  min-width: 300px;
+  max-width: 600px;
+  height: 80%;
+  min-height: 500px;
+  max-height: 800px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  max-width: 600px;
+  height: 80%;
+  background-color: white;
+  border-radius: 10px;
+  overflow: auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10000;
+}
+
+pdf-viewer {
+  flex: 1;
+  width: 90%;
+  height: 80%;
+}
+
+.modal-container img {
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
+}
+.btn-back {
+  width: 50%;
+  align-self: center;
+  display: inline-block;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+  background: $btn-bg-download;
+  color: $btn-text;
+  padding: $btn-download-padding;
+  margin: 5px;
+  font-size: $btn-font-size;
+  line-height: 1;
+  border-radius: $btn-radius;
+  cursor: pointer;
+  box-shadow: $btn-shadow;
+  transition: transform $btn-transition, background-color $btn-transition,
+    box-shadow $btn-transition;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  width: 200px;
+  /* Pieni typographic parannus */
+  font-weight: 600;
+  letter-spacing: 0.01em;
+
+  &:hover {
+    background: $btn-bg-download-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(2, 6, 23, 0.14);
+  }
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 6px 12px rgba(2, 6, 23, 0.1);
+  }
+
+  /* Näkyvä fokus (näppäimistökäyttäjille) */
+  &:focus {
+    outline: none;
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 4px rgba(#0066ff, 0.12), $btn-shadow;
+  }
+  /* Disabled-tila */
+  &:disabled {
+    background: color.adjust($btn-bg-download, $saturation: -30%);
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+  }
+}
+iframe {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+@media (max-width: 600px) {
+  .modal-container,
+  .alternative-view {
+    width: 90%;
+    height: 90%;
+    min-width: unset;
+    min-height: unset;
+    max-width: unset;
+    max-height: unset;
+  }
+
+  .btn-back {
+    width: 100%;
+    font-size: 0.9rem;
+    padding: 0.8rem 1.5rem;
+  }
+}

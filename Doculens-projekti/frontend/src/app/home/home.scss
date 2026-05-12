@@ -1,0 +1,342 @@
+@use 'sass:color';
+
+// 🎨 Värimuuttujat
+$btn-bg-nav: #4b42c8;
+$btn-bg-download: #0066ff;
+$btn-bg-nav-hover: color.adjust($btn-bg-nav, $lightness: -8%);
+$btn-bg-download-hover: color.adjust($btn-bg-download, $lightness: -8%);
+$btn-text: #ffffff;
+$btn-radius: 15px;
+$btn-font-size: 0.95rem;
+$btn-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+$btn-transition: 180ms ease;
+
+// 🔍 Lomake-elementtien värit
+$form-input-bg: #f4f6ff;
+
+// 🗂 Dokumenttilistan värit modaalissa
+$doc-bg: #f0f4ff;
+$doc-border: #dce3f5;
+$doc-hover: #dce3f5;
+$doc-active: #e0e8ff;
+
+// Varjostukset (sopii valkoiseen + #eaf4ff taustaan)
+$doc-shadow-sides: 3px 0 8px rgba(100, 140, 180, 0.12), -3px 0 8px rgba(100, 140, 180, 0.12);
+
+$doc-shadow-full: 0 4px 12px rgba(100, 140, 180, 0.15);
+
+// 🧩 Yhteinen nappityyli
+@mixin button-base {
+  width: 100%;
+  max-width: 180px;
+  padding: 0.6rem 1.2rem;
+  font-size: clamp(0.85rem, 2vw, $btn-font-size);
+  font-weight: 600;
+  border: none;
+  border-radius: $btn-radius;
+  cursor: pointer;
+  transition: background-color $btn-transition, transform $btn-transition;
+  box-shadow: $btn-shadow;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.2);
+  }
+  &:disabled {
+    background-color: #aaa;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+// 🟪 Valmiit nappi
+.btn-nav {
+  @include button-base;
+  background-color: $btn-bg-nav;
+  color: $btn-text;
+  &:hover {
+    background-color: $btn-bg-nav-hover;
+  }
+}
+
+.user-change {
+  @include button-base;
+  max-width: 60px;
+  background-color: #ffffff;
+  color: #ffffff;
+}
+
+.page-title {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+// 🔵 Oikea nappi
+.btn-download {
+  @include button-base;
+  background-color: $btn-bg-download;
+  color: $btn-text;
+  &:hover {
+    background-color: $btn-bg-download-hover;
+  }
+}
+
+.pallet-input {
+  width: 20%;
+  flex: none;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  background-color: $form-input-bg;
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  &:focus {
+    outline: none;
+    border-color: $btn-bg-nav;
+    box-shadow: 0 0 0 3px rgba($btn-bg-nav, 0.2);
+  }
+}
+
+.nav-button-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap; // allow buttons to wrap
+  gap: 0.5rem; // optional spacing between buttons
+}
+
+// 📐 Nappirivi
+.button-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 0 5px;
+  gap: 10px;
+  margin-bottom: 2rem;
+  > button {
+    flex: 1 1 0;
+    max-width: 180px;
+  }
+}
+
+// 🔍 HAKULOMAKE
+.search-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1rem 0 2rem;
+  width: 100%;
+  max-width: 600px;
+}
+.search-input,
+input[type='date'] {
+  flex: 1 1 200px;
+  padding: 0.6rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  background-color: $form-input-bg;
+  color: #000;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  &:focus {
+    outline: none;
+    border-color: $btn-bg-nav;
+    box-shadow: 0 0 0 3px rgba($btn-bg-nav, 0.2);
+  }
+}
+.search-button {
+  @include button-base;
+  background-color: #00cc66;
+  color: $btn-text;
+  &:hover {
+    background-color: color.adjust(#00cc66, $lightness: -8%);
+  }
+}
+.reset-button {
+  @include button-base;
+  background-color: #888;
+  color: $btn-text;
+  &:hover {
+    background-color: color.adjust(#888, $lightness: -8%);
+  }
+}
+.maara-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #000;
+  @include button-base;
+  background-color: transparent;
+  max-width: 5rem;
+  border: black 1px solid;
+}
+
+// 📦 Keskitetty kontti
+.container {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 600px) {
+  .nav-button-row {
+    gap: 1rem;
+  }
+  .container {
+    width: 90%;
+  }
+  .button-row {
+    flex-direction: row;
+    align-items: center;
+  }
+  .button-row > button {
+    width: 80%;
+    max-width: 100%;
+  }
+  .button-row > input {
+    width: 20%;
+  }
+}
+
+// 🗂 Dokumenttilista modaalissa
+.document-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 1rem auto;
+  width: 100%;
+  max-width: 600px;
+}
+.selection-title {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #000;
+  text-align: center;
+}
+
+.document,
+.first-document,
+.last-document {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.25rem;
+  background-color: $doc-bg;
+  border: 1px solid $doc-border;
+  border-radius: 0;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.2s ease;
+  &:hover {
+    background-color: $doc-hover;
+    transform: translateY(-2px);
+  }
+  &:active {
+    background-color: $doc-active;
+    transform: translateY(0);
+  }
+  .top-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #333;
+    .filename {
+      text-align: left;
+      color: #222;
+    }
+    .date {
+      text-align: right;
+      font-size: 0.85rem;
+      color: #666;
+    }
+  }
+  .bottom-row {
+    margin-top: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #444;
+    text-align: left;
+    width: 100%;
+  }
+}
+
+// 🔝 Ylin dokumentti
+.first-document {
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  box-shadow: $doc-shadow-full;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+// 🔚 Alin dokumentti
+.last-document {
+  border-bottom-left-radius: 14px;
+  border-bottom-right-radius: 14px;
+  box-shadow: $doc-shadow-full;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
+// 🔹 Keskimmäiset dokumentit
+.document:not(.first-document):not(.last-document) {
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+  box-shadow: $doc-shadow-sides;
+}
+
+// 🪶 Tyhjä näkymä modaalissa
+.no-documents-view {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  text-align: center;
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+  background-color: #fafafa;
+}
+.no-documents-view-text {
+  color: #777;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 480px) {
+  .filename {
+    width: 160px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+}
+
+.title {
+  color: white;
+}

@@ -1,0 +1,193 @@
+@use 'sass:color';
+
+$btn-bg-download: black;
+$btn-bg-send: #00cc66;
+$btn-bg-list: #0066ff;
+$btn-bg-download-hover: color.adjust($btn-bg-download, $lightness: -8%);
+$btn-bg-send-hover: color.adjust($btn-bg-send, $lightness: -8%);
+$btn-bg-list-hover: color.adjust($btn-bg-list, $lightness: -8%);
+$btn-text: #ffffff;
+$btn-download-padding: 1rem 2.1rem;
+$btn-send-padding: 0.2rem 2.1rem;
+$btn-list-padding: 0.2rem 2.1rem;
+$btn-radius: 20px;
+$btn-font-size: 1rem;
+$btn-shadow: 0 6px 18px rgba(2, 6, 23, 0.12);
+$btn-transition: 180ms cubic-bezier(0.2, 0.9, 0.3, 1);
+
+@keyframes overlayFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modalPop {
+  0% {
+    transform: scale(0.92) translateY(8px);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.02) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes modalClose {
+  0% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  40% {
+    transform: scale(1.02) translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.92) translateY(8px);
+    opacity: 0;
+  }
+}
+
+.modal-container.closing {
+  animation: modalClose 260ms cubic-bezier(0.22, 0.9, 0.3, 1) forwards;
+}
+
+/* Overlayt */
+.modal-overlay,
+.modal-overlay-blur {
+  animation: overlayFade 220ms ease-out;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-overlay-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+/* Modalin kontti */
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 25%;
+  min-width: 250px;
+  height: 25%;
+  min-height: 150px;
+  position: absolute;
+  border-radius: 10px;
+  z-index: 10000;
+  animation: modalPop 260ms cubic-bezier(0.22, 0.9, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+/* Tilakohtaiset taustat */
+.modal-container.success {
+  background-color: #4caf50;
+}
+.modal-container.error {
+  background-color: #f44336;
+}
+.modal-container.loading {
+  background-color: #ffbf00;
+}
+
+/* Tilakohtaiset tekstivärit */
+.modal-container.success .modal-message,
+.modal-container.error .modal-message {
+  color: #fff;
+}
+
+.modal-container.loading .modal-message {
+  color: rgb(198, 109, 1);
+}
+
+/* Viesti-elementti */
+.modal-message {
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* OK-nappi */
+.btn-ok {
+  width: 200px;
+  align-self: center;
+  display: inline-block;
+  appearance: none;
+  -webkit-appearance: none;
+  border: black solid 2px;
+  background: $btn-bg-download;
+  color: $btn-text;
+  padding: $btn-download-padding;
+  margin: 5px;
+  font-size: $btn-font-size;
+  line-height: 1;
+  border-radius: $btn-radius;
+  cursor: pointer;
+  box-shadow: $btn-shadow;
+  transition: transform $btn-transition, background-color $btn-transition,
+    box-shadow $btn-transition;
+  user-select: none;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+
+  &:hover {
+    background: $btn-bg-download-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 22px rgba(2, 6, 23, 0.14);
+  }
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 6px 12px rgba(2, 6, 23, 0.1);
+  }
+  &:focus {
+    outline: none;
+  }
+  &:focus-visible {
+    box-shadow: 0 0 0 4px rgba(#0066ff, 0.12), $btn-shadow;
+  }
+  &:disabled {
+    background: color.adjust($btn-bg-download, $saturation: -30%);
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+iframe {
+  width: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
