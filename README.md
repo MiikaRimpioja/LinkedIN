@@ -1,2 +1,2 @@
-# LinkedIN
-My projects to be shown on my LinkedIN-profile 
+#Portfolio
+My projects to be showcased
